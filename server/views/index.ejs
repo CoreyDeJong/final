@@ -24,7 +24,9 @@
           <h2><%= results[x].name %></h2>
         </header>
         <span><%= results[x].likes || 0 %></span>
-        <button>Upvote</button>
+          <form action="<%=`/update/${character.name}?_method=PUT` %>" method="post"></form>
+          <button <%= character.name %>'>Upvote</button>
+          </form>
       </div>
       <% } %>
 

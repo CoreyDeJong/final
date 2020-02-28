@@ -3,11 +3,6 @@
 // **** Require/Include all of our external dependencies (3rd party modules) ****
 
 
-///added dotenv
-require('dotenv').config();
-
-
-
 
 // Express server library
 const express = require('express');
@@ -51,6 +46,30 @@ app.get('/', routes.homePageHandler);
 // Wire in the defaults we required above.
 app.use('*', defaults.notFoundHandler);
 app.use(defaults.errorHandler);
+
+
+
+////////
+app.put('/update/:characters_name', updateCharacterName);
+
+function updateCharacterName(request, response){
+
+  let {title, description, contact, status} = request.body;
+  let id = request.params.characters_name;
+
+  let sql = 'UPDATE tasks SET title=$1, description=$2, contact=$3, status=$4 WHERE id=$5;';
+
+  let safeValues=[title, description, contact, status, id];
+
+  client.query(sql, safeValues)
+    .then(() => {
+      response.redirect('/server/index.ejs');
+    })
+}
+
+
+
+
 
 // Start the web server on a port (defaults to 3000), after we connect to the database
 function startServer() {
