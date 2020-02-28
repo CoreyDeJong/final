@@ -2,6 +2,13 @@
 
 // **** Require/Include all of our external dependencies (3rd party modules) ****
 
+
+///added dotenv
+require('dotenv').config();
+
+
+
+
 // Express server library
 const express = require('express');
 // Create an application using express
